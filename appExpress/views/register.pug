@@ -1,0 +1,83 @@
+extends layout
+
+block styles
+  style.
+    label {
+      font-weight: 600;
+      color: #666;
+    }
+    body {
+      background: #f1f1f1;
+    }
+    .box8 {
+      box-shadow: 0px 0px 5px 1px #999;
+    }
+    .mx-t3 {
+      margin-top: -3rem;
+    }
+    
+block content
+  .container.mt-3
+    form(action='/register', method='post')
+      .row.jumbotron.box8
+        .col-sm-12.mx-t3.mb-4
+          h2.text-center.text-info Register
+        .col-sm-6.form-group
+          label(for='name-f') First Name
+          input.form-control(type='text', name='fname', id='name-f', placeholder='Enter your first name.', required)
+        .col-sm-6.form-group
+          label(for='name-l') Last Name
+          input.form-control(type='text', name='lname', id='name-l', placeholder='Enter your last name.', required)
+        .col-sm-6.form-group
+          label(for='email') Email
+          input.form-control(type='email', name='email', id='email', placeholder='Enter your email.', required)
+        .col-sm-6.form-group
+          label(for='address-1') Address Line-1
+          input.form-control(type='text', name='Locality', id='address-1', placeholder='Locality/House/Street no.', required)
+        .col-sm-6.form-group
+          label(for='address-2') Address Line-2
+          input.form-control(type='text', name='address', id='address-2', placeholder='Village/City Name.', required)
+        .col-sm-4.form-group
+          label(for='State') State
+          input.form-control(type='text', name='State', id='State', placeholder='Enter your state name.', required)
+        .col-sm-2.form-group
+          label(for='zip') Postal-Code
+          input.form-control(type='text', name='Zip', id='zip', placeholder='Postal-Code.', required)
+        .col-sm-6.form-group
+          label(for='Country') Country
+          select.form-control.custom-select.browser-default(name='Country', id='Country', required)
+            each entry in Object.entries(countries)
+              - let [countryCode, countryDetails] = entry
+                option(value=countryDetails.code)= countryDetails.name
+        .col-sm-6.form-group
+          label(for='Date') Date Of Birth
+          input.form-control(type='date', name='dob', id='Date', placeholder='', required)
+        .col-sm-6.form-group
+          label(for='sex') Gender
+          select#sex.form-control.browser-default.custom-select(name='sex', required)
+            option(value='') Select your gender
+            option(value='male') Male
+            option(value='female') Female
+            option(value='unspecified') Unspecified
+        .col-sm-2.form-group
+          label(for='cod') Country code
+          select.form-control.browser-default.custom-select(id='cod',name='cod', required)            
+            each entry in Object.entries(countries)
+              - let [countryCode, countryDetails] = entry
+                option(value=countryDetails.code)= countryDetails.dialCode+'   '+'('+countryDetails.name+')'
+        .col-sm-4.form-group
+          label(for='tel') Phone
+          input.form-control(type='tel', name='phone', id='tel', placeholder='Enter Your Contact Number.', required)
+        .col-sm-6.form-group
+          label(for='pass') Password
+          input.form-control(type='password', name='password', id='pass', placeholder='Enter your password.', required)
+        .col-sm-6.form-group
+          label(for='pass2') Confirm Password
+          input.form-control(type='password', name='cnf-password', id='pass2', placeholder='Re-enter your password.', required)
+        .col-sm-12
+          input.form-check.d-inline(type='checkbox', id='chb', name='chb', required)
+          label.form-check-label(for='chb') &nbsp;I accept all terms and conditions.
+        .col-sm-12.form-group.mb-0
+          button.btn.btn-primary.float-right Submit
+
+          
