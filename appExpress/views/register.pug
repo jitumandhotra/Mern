@@ -18,10 +18,10 @@ block styles
     
 block content
   .container.mt-3
-    form(action='/register', method='post')
-      .row.jumbotron.box8
+    form(id="regis-form" action='/register', method='post')
+      .row.jumbotron.box8.p-5
         .col-sm-12.mx-t3.mb-4
-          h2.text-center.text-info Register
+          h2.text-center.text-info Registration
         .col-sm-6.form-group
           label(for='name-f') First Name
           input.form-control(type='text', name='fname', id='name-f', placeholder='Enter your first name.', required)
@@ -74,10 +74,48 @@ block content
         .col-sm-6.form-group
           label(for='pass2') Confirm Password
           input.form-control(type='password', name='cnf-password', id='pass2', placeholder='Re-enter your password.', required)
-        .col-sm-12
+          div#password-message.text-muted
+        .col-sm-12.d-flex.p-2
           input.form-check.d-inline(type='checkbox', id='chb', name='chb', required)
           label.form-check-label(for='chb') &nbsp;I accept all terms and conditions.
-        .col-sm-12.form-group.mb-0
+        .col-sm-12.form-group.mb-0.text-center
           button.btn.btn-primary.float-right Submit
 
-          
+block scripts
+  script.
+    $(document).ready(function() {
+      var passMatch = false;      
+      $("#Country, #cod").on("change", function() {
+        var id = $(this).attr("id");
+        var value = $(this).val();
+        if (id === "Country") {
+          $("#cod").val(value);
+        } else if (id === "cod") {
+          $("#Country").val(value);
+        }
+      });
+      $("#pass2").on("keyup", function() {
+        var password = $("#pass").val();
+        var confirmPassword = $(this).val();
+        var message = "";
+        if (password === confirmPassword) {
+          $(this).removeClass("is-invalid").addClass("is-valid");
+          $("#password-message").text("").hide();
+          passMatch = true;
+        } else {
+          $(this).removeClass("is-valid").addClass("is-invalid");
+          $("#password-message").text("Passwords do not match.").show();
+        }            
+      });      
+      $("#regis-form").on("submit", function(event) {
+        if (!passMatch) {
+          event.preventDefault();     
+        }
+      });
+    });
+
+
+
+
+
+
