@@ -21,6 +21,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/register', require('./routes/register'));
 app.use('/login', require('./routes/login'));
+app.use('/logout', require('./routes/logout'));
 app.use(function(req, res, next) {
   next(createError(404));
 });
