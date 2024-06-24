@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const countries = require('../utils/country');
+const bcrypt = require('bcryptjs');
 router.get('/', (req, res) => {
     res.render('register', { countries: countries });
 });
@@ -14,6 +15,8 @@ router.post('/', async (req, res) => {
         }
     }
     try {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
         const newUser = new User({
             firstName: req.body.fname,
             lastName: req.body.lname,
@@ -27,11 +30,11 @@ router.post('/', async (req, res) => {
             gender: req.body.sex,
             countryCode: req.body.cod,
             phone: req.body.phone,
-            password: req.body.password,
+            password: hashedPassword,
             termsAndConditions: req.body.chb === 'on'
         });
         const savedUser = await newUser.save();
-        res.send('User registered successfully');
+        res.redirect('/login');
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Error registering user');

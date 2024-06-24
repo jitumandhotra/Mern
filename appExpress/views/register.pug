@@ -74,7 +74,7 @@ block content
         .col-sm-6.form-group
           label(for='pass2') Confirm Password
           input.form-control(type='password', name='cnf-password', id='pass2', placeholder='Re-enter your password.', required)
-          div#password-message.text-muted
+          div#password-message.invalid-feedback Passwords do not match.
         .col-sm-12.d-flex.p-2
           input.form-check.d-inline(type='checkbox', id='chb', name='chb', required)
           label.form-check-label(for='chb') &nbsp;I accept all terms and conditions.
@@ -100,11 +100,9 @@ block scripts
         var message = "";
         if (password === confirmPassword) {
           $(this).removeClass("is-invalid").addClass("is-valid");
-          $("#password-message").text("").hide();
           passMatch = true;
         } else {
           $(this).removeClass("is-valid").addClass("is-invalid");
-          $("#password-message").text("Passwords do not match.").show();
         }            
       });      
       $("#regis-form").on("submit", function(event) {
