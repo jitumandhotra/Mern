@@ -3,7 +3,8 @@ const routesPaths = [
     { path: '/users', router: require('../routes/users') },
     { path: '/register', router: require('../routes/register') },
     { path: '/login', router: require('../routes/login') },
-    { path: '/logout', router: require('../routes/logout') }
+    { path: '/logout', router: require('../routes/logout') },
+    { path: '/home', router: require('../routes/home') }
 ];
 
 module.exports = routesPaths;

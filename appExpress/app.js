@@ -3,13 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const routesPaths = require('./utils/routPaths');
+const connectDB = require('./utils/connectDb');
 var app = express();
 require('dotenv').config();
-const connectDB = require('./utils/connectDb');
 connectDB();
-const routesPaths = require('./utils/routPaths');
+
  
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -26,6 +25,7 @@ routesPaths.forEach(route => {
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -67,8 +67,6 @@ block content
   main
     .form-container
       h4 Login
-      if error
-        div.alert.alert-danger(role="alert")= error
       .form-content
         form(id="login-form" action='/login', method='post')
             input(type='text', placeholder='Email' name="email")
