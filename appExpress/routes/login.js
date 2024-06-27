@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
         }
         const token = jwt.sign({ userId: user._id ,user:user }, process.env.JWT_SECRET);
         res.cookie('auth', token, { httpOnly: true, expires: new Date(Date.now() + 3600000)  });
-        res.redirect('/home');
+        res.redirect('/');
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Error logging in');
