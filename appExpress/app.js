@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const routesPaths = require('./utils/routPaths');
 const connectDB = require('./utils/connectDb');
+const session = require('express-session');
 var app = express();
 require('dotenv').config();
 connectDB();
@@ -17,6 +18,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
 
 routesPaths.forEach(route => {
   app.use(route.path, route.router);
