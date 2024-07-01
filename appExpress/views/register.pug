@@ -1,27 +1,11 @@
 extends layout
-
-block styles
-  style.
-    label {
-      font-weight: 600;
-      color: #666;
-    }
-    body {
-      background: #f1f1f1;
-    }
-    .box8 {
-      box-shadow: 0px 0px 5px 1px #999;
-    }
-    .mx-t3 {
-      margin-top: -3rem;
-    }
     
 block content
-  .container.mt-3
+  .container.mt-3.reg-main
     form(id="regis-form" action='/register', method='post')
-      .row.jumbotron.box8.p-5
+      .row.jumbotron.box8.p-5.mb-3.reg-row
         .col-sm-12.mx-t3.mb-4
-          h2.text-center.text-info Registration
+          h2.text-center.text-light Registration
         .col-sm-6.form-group
           label(for='name-f') First Name
           input.form-control(type='text', name='fname', id='name-f', placeholder='Enter your first name.', required)
@@ -79,7 +63,7 @@ block content
           input.form-check.d-inline(type='checkbox', id='chb', name='chb', required)
           label.form-check-label(for='chb') &nbsp;I accept all terms and conditions.
         .col-sm-12.form-group.mb-0.text-center
-          button.btn.btn-primary.float-right Submit
+          button.btn.btn-info.float-right.text-light.fw-semibold.fs-6 Register
 
 block scripts
   script.
